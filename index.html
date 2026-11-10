@@ -5,9 +5,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sweet Bakery | Gallery</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Prompt', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --blue: #58b9e9;
     --lightblue: #e1f5ff;
@@ -16,176 +28,246 @@
     --text: #5c7183;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html { scroll-behavior: smooth; }
-
 body {
-    font-family: 'Prompt', sans-serif;
+    background: linear-gradient(-45deg,#e4f7ff,#fff0f7,#e5f6ff,#ffe5f1);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
     color: var(--text);
-    background: linear-gradient(135deg,#e4f7ff,#fff0f7,#e5f6ff,#ffe5f1);
-    background-size: 300% 300%;
-    animation: backgroundMove 18s ease-in-out infinite;
-    min-height: 100vh;
     overflow-x: hidden;
 }
 
-@keyframes backgroundMove {
+@keyframes gradientBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
+/* DECORATION */
 .decor {
     position: fixed;
-    color: #ff91bd;
-    opacity: .35;
-    font-size: 24px;
-    pointer-events: none;
     z-index: -1;
-    animation: floatDecor 5s ease-in-out infinite;
+    font-size: 65px;
+    opacity: .15;
+    animation: float 5s ease-in-out infinite;
+    pointer-events: none;
 }
 
-.decor.one { top: 15%; left: 5%; }
-.decor.two { top: 55%; right: 7%; animation-delay: 1.5s; }
-.decor.three { bottom: 12%; left: 12%; animation-delay: 2.5s; }
+.decor.one {
+    top: 20%;
+    left: 3%;
+}
 
-@keyframes floatDecor {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+.decor.two {
+    bottom: 12%;
+    right: 4%;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0) rotate(-10deg); }
+    50% { transform: translateY(-25px) rotate(10deg); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 /* HEADER */
 header {
     text-align: center;
-    padding: 65px 20px;
+    padding: 75px 20px 60px;
     background:
-        radial-gradient(circle at 20% 20%,#ffffffaa,transparent 30%),
-        linear-gradient(120deg,#8edcff,#ffc2dc);
-    border-radius: 0 0 45px 45px;
-    box-shadow: 0 8px 25px #91cde633;
+        radial-gradient(circle at 15% 20%,#ffffff 0,transparent 25%),
+        linear-gradient(120deg,#bceaff,#ffd9e9);
+    background-size: 200% 200%;
+    animation: headerGradient 6s infinite alternate;
     position: relative;
     overflow: hidden;
 }
 
-header h1 {
-    font-size: clamp(32px,6vw,55px);
+@keyframes headerGradient {
+    from { background-position: 0% 50%; }
+    to { background-position: 100% 50%; }
+}
+
+header::before {
+    content: "✦";
+    position: absolute;
+    top: 15px;
+    left: 12%;
+    font-size: 65px;
     color: white;
-    text-shadow: 2px 4px 8px #d66f9c55;
-    animation: titleAppear 1.5s ease both;
+    animation: spin 10s linear infinite;
+}
+
+header::after {
+    content: "♡";
+    position: absolute;
+    right: 12%;
+    bottom: 10px;
+    font-size: 80px;
+    color: white;
+    animation: float 4s infinite;
+}
+
+header h1 {
+    font-size: clamp(35px,6vw,60px);
+    color: #399ccc;
+    text-shadow: 3px 5px 15px #ffffff;
+    animation: slideDown .8s ease;
+}
+
+header h1 span {
+    color: #e979aa;
 }
 
 header p {
-    color: white;
+    margin-top: 12px;
+    color: #66869b;
     font-size: 16px;
-    margin-top: 10px;
-    animation: titleAppear 2s ease both;
+    line-height: 1.8;
 }
 
-@keyframes titleAppear {
-    from { opacity: 0; transform: translateY(18px); }
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 /* NAVIGATION */
 nav {
-    position: sticky;
-    top: 10px;
-    z-index: 100;
     display: flex;
     justify-content: center;
     gap: 12px;
     padding: 15px;
-    margin: 15px auto;
-    width: fit-content;
-    max-width: 95%;
-    background: #ffffffdc;
+    background: #ffffffd9;
     backdrop-filter: blur(12px);
-    border-radius: 50px;
-    box-shadow: 0 5px 20px #8dbbd533;
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 5px 20px #77c4e533;
 }
 
 nav button {
     border: none;
     background: transparent;
+    color: #63849a;
     padding: 10px 22px;
     border-radius: 30px;
-    font-family: inherit;
-    font-size: 15px;
-    color: var(--text);
     cursor: pointer;
-    transition: background .5s ease,color .5s ease;
+    transition: .3s;
+    font-size: 14px;
+    position: relative;
 }
 
 nav button:hover,
 nav button.active {
-    background: linear-gradient(120deg,var(--blue),var(--pink));
+    background: linear-gradient(100deg,#58b9e9,#ff91bd);
     color: white;
+    box-shadow: 0 6px 15px #81c9ed77;
+    transform: translateY(-3px);
+}
+
+nav button::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: #ff91bd;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+nav button:hover::after {
+    width: 70%;
+    left: 15%;
 }
 
 /* PAGE */
 .page {
     display: none;
-    padding: 35px 7%;
 }
 
 .page.active {
     display: block;
-    animation: pageAppear .8s ease;
+    animation: fade .5s ease;
 }
 
-@keyframes pageAppear {
-    from { opacity: 0; transform: translateY(12px); }
+@keyframes fade {
+    from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* HERO */
+/* HOME */
 .hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 35px;
-    max-width: 1150px;
-    margin: 25px auto 60px;
+    padding: 65px 9%;
+    flex-wrap: wrap;
+    position: relative;
 }
 
-.hero-text h2 {
-    color: var(--darkpink);
-    font-size: clamp(27px,4vw,42px);
-    margin-bottom: 15px;
+.hero-text {
+    flex: 1;
+    min-width: 270px;
 }
 
-.hero-text p {
+.tag {
+    display: inline-block;
+    background: white;
+    color: #4da8d7;
+    padding: 9px 18px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px #83c9ed44;
+    transition: .3s;
+}
+
+.tag:hover {
+    transform: scale(1.05);
+}
+
+.hero h2 {
+    color: #399ccc;
+    font-size: clamp(35px,5vw,55px);
+    line-height: 1.4;
+    margin: 18px 0;
+}
+
+.hero h2 span {
+    color: #eb7eae;
+}
+
+.hero p {
     line-height: 2;
-    font-size: 16px;
+    color: #73899a;
 }
-
-.hero-text .main-btn { margin-top: 22px; }
 
 .main-btn {
-    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 30px;
     border: none;
-    background: linear-gradient(120deg,var(--blue),var(--pink));
+    border-radius: 35px;
+    background: linear-gradient(100deg,#58b9e9,#ff91bd);
     color: white;
-    padding: 13px 28px;
-    border-radius: 30px;
-    font-family: inherit;
     font-size: 15px;
     cursor: pointer;
-    transition: transform .4s ease,box-shadow .4s ease;
-    box-shadow: 0 5px 15px #ee9fc155;
+    box-shadow: 0 8px 20px #81c9ed77;
+    transition: .3s;
 }
 
 .main-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px #ee9fc177;
+    transform: translateY(-6px) scale(1.06);
+    box-shadow: 0 13px 25px #81c9ed99;
 }
 
 .hero-gallery {
+    flex: 1;
+    min-width: 270px;
+    max-width: 460px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
@@ -193,200 +275,297 @@ nav button.active {
 
 .hero-gallery img {
     width: 100%;
-    height: 190px;
+    height: 175px;
     object-fit: cover;
-    border-radius: 22px;
-    box-shadow: 0 6px 18px #8bbbd544;
-    transition: transform .6s ease;
-    animation: gentleFloat 4s ease-in-out infinite;
+    border-radius: 25px;
+    border: 5px solid white;
+    box-shadow: 0 8px 20px #79c5e655;
+    transition: .4s;
 }
 
-.hero-gallery img:nth-child(2) { animation-delay: 1s; }
-.hero-gallery img:nth-child(3) { animation-delay: 2s; }
-.hero-gallery img:nth-child(4) { animation-delay: 3s; }
-
-@keyframes gentleFloat {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
-
-.hero-gallery img:hover { transform: scale(1.04); }
-
-/* TITLES */
-.title {
-    text-align: center;
-    color: var(--darkpink);
-    font-size: clamp(25px,4vw,35px);
-    margin: 30px 0 35px;
+.hero-gallery img:hover {
+    transform: scale(1.08) rotate(2deg);
 }
 
 /* FEATURES */
 .features {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 22px;
-    max-width: 1100px;
-    margin: 0 auto 70px;
-}
-
-.feature-card {
-    background: #ffffffd9;
-    border-radius: 25px;
-    padding: 30px 20px;
+    padding: 45px 8% 65px;
     text-align: center;
-    box-shadow: 0 7px 20px #8bbbd522;
-    transition: transform .5s ease,box-shadow .5s ease;
 }
 
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px #e99fbe44;
+.title {
+    font-size: 32px;
+    color: #399ccc;
+    margin-bottom: 10px;
+    animation: titleFloat 3s ease-in-out infinite;
 }
 
-.feature-card .emoji {
-    font-size: 42px;
-    margin-bottom: 12px;
+@keyframes titleFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
 
-.feature-card h3 {
-    color: var(--darkpink);
-    margin-bottom: 8px;
-}
-
-/* FILTER */
-.filter-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
+.description {
+    color: #879baa;
     margin-bottom: 30px;
 }
 
-.filter-buttons button {
-    border: 2px solid #ffd1e4;
-    background: white;
-    color: var(--darkpink);
-    padding: 10px 22px;
-    border-radius: 25px;
-    font-family: inherit;
-    cursor: pointer;
-    transition: background .4s ease,color .4s ease;
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px;
 }
 
-.filter-buttons button:hover,
-.filter-buttons button.active {
-    background: linear-gradient(120deg,var(--blue),var(--pink));
-    color: white;
-    border-color: transparent;
+.feature {
+    background: white;
+    border: 2px solid #d9f1ff;
+    border-radius: 25px;
+    padding: 30px 15px;
+    box-shadow: 0 8px 22px #8ac9e633;
+    transition: .35s;
+}
+
+.feature:hover {
+    transform: translateY(-10px) rotate(1deg);
+    border-color: #ffaed0;
+    box-shadow: 0 15px 30px #8ac9e677;
+}
+
+.feature span {
+    font-size: 45px;
+}
+
+.feature h3 {
+    color: #df78a8;
+    margin: 10px 0;
 }
 
 /* GALLERY */
+.gallery-section {
+    padding: 55px 7%;
+    text-align: center;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 30px 0 40px;
+}
+
+.filters button {
+    padding: 11px 23px;
+    border: 2px solid #a9ddf5;
+    background: white;
+    color: #529fc9;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s;
+    font-size: 14px;
+}
+
+.filters button:hover,
+.filters button.active {
+    background: linear-gradient(100deg,#58b9e9,#ff91bd);
+    color: white;
+    border-color: transparent;
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px #83c9ed77;
+}
+
+/* GALLERY GRID */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 25px;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 28px;
     max-width: 1200px;
     margin: auto;
 }
 
-.food-card {
-    background: #ffffffed;
+/* CARDS */
+.card {
+    background: white;
+    border: 2px solid #e0f4ff;
     border-radius: 25px;
     overflow: hidden;
-    box-shadow: 0 6px 20px #8bbbd533;
-    transition: transform .5s ease,box-shadow .5s ease;
-    animation: cardAppear .8s ease both;
+    text-align: left;
+    box-shadow: 0 8px 25px #7fc6e633;
+    transition: .4s;
+    animation: cardIn .5s ease;
 }
 
-@keyframes cardAppear {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(25px) scale(.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.food-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px #e99fbe55;
+.card:hover {
+    transform: translateY(-10px);
+    border-color: #ffacd0;
+    box-shadow: 0 18px 35px #78c3e866;
 }
 
-.food-card.hide { display: none; }
+.card.hide {
+    display: none;
+}
 
-.food-card img {
+.card-image {
+    height: 225px;
+    overflow: hidden;
+    background: #e5f6ff;
+}
+
+.card-image img {
     width: 100%;
-    height: 230px;
+    height: 100%;
     object-fit: cover;
-    transition: transform .7s ease;
+    transition: .6s;
 }
 
-.food-card:hover img { transform: scale(1.04); }
-
-.food-info { padding: 20px; }
-
-.food-info h3 {
-    color: var(--darkpink);
-    font-size: 19px;
-    margin-bottom: 8px;
+.card:hover img {
+    transform: scale(1.12);
 }
 
-.food-info p {
+.card-content {
+    padding: 20px;
+}
+
+.card h3 {
+    color: #429fcf;
+    font-size: 18px;
+}
+
+.card p {
+    color: #8a9eac;
     font-size: 14px;
+    margin-top: 6px;
     line-height: 1.7;
 }
 
+/* LIKE BUTTON */
+.like-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-top: 1px solid #e3f3fc;
+    padding-top: 15px;
+    margin-top: 17px;
+}
+
 .like-btn {
-    margin-top: 15px;
     border: none;
-    background: #fff0f6;
-    color: var(--darkpink);
-    padding: 9px 16px;
-    border-radius: 25px;
-    font-family: inherit;
+    background: #e7f6ff;
+    color: #439fce;
+    border-radius: 30px;
+    padding: 10px 17px;
     cursor: pointer;
-    transition: background .4s ease,transform .4s ease;
+    transition: .25s;
 }
 
 .like-btn:hover {
-    background: #ffd7e8;
-    transform: scale(1.03);
+    background: #ffddeb;
+    color: #dc639f;
+    transform: scale(1.08);
 }
 
-.like-btn.pop { animation: likePop .4s ease; }
+.like-btn:active {
+    transform: scale(.9);
+}
 
-@keyframes likePop {
-    50% { transform: scale(1.1); }
+.like-count {
+    color: #e77cac;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.pop {
+    animation: heartPop .35s ease;
+}
+
+@keyframes heartPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.35); }
+    100% { transform: scale(1); }
 }
 
 /* FOOTER */
 footer {
-    margin-top: 70px;
-    padding: 30px 15px;
+    margin-top: 50px;
+    padding: 35px 15px;
     text-align: center;
-    background: linear-gradient(120deg,#a6e3ff,#ffc5df);
-    color: white;
-    border-radius: 35px 35px 0 0;
-    line-height: 2;
+    background: linear-gradient(110deg,#c7edff,#ffd9e9);
+    color: #66869b;
+}
+
+footer h3 {
+    color: #399ccc;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+/* GENERAL BUTTON EFFECT */
+button {
+    transition: all .3s ease;
+}
+
+button:active {
+    transform: scale(.94);
 }
 
 /* RESPONSIVE */
-@media (max-width: 900px) {
-    .gallery { grid-template-columns: repeat(2,1fr); }
-    .hero { grid-template-columns: 1fr; }
-    .features { grid-template-columns: 1fr 1fr; }
+@media(max-width:900px) {
+    .gallery {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
 }
 
-@media (max-width: 600px) {
-    header { padding: 45px 15px; }
-    nav { gap: 3px; }
-    nav button { padding: 9px 13px; font-size: 13px; }
-    .page { padding: 25px 5%; }
-    .gallery,.features { grid-template-columns: 1fr; }
-    .hero-gallery img { height: 145px; }
-    .food-card img { height: 220px; }
+@media(max-width:600px) {
+    header {
+        padding: 55px 15px;
+    }
+
+    nav {
+        padding: 12px 5px;
+        gap: 5px;
+    }
+
+    nav button {
+        padding: 9px 13px;
+        font-size: 12px;
+    }
+
+    .hero {
+        text-align: center;
+        padding: 45px 6%;
+    }
+
+    .hero-gallery img {
+        height: 140px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+        max-width: 390px;
+    }
+
+    .card-image {
+        height: 230px;
+    }
+
+    .title {
+        font-size: 27px;
+    }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    *,*::before,*::after {
+@media(prefers-reduced-motion:reduce) {
+    *, *::before, *::after {
         animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
         scroll-behavior: auto !important;
     }
@@ -398,16 +577,18 @@ footer {
 
 <div class="decor one">✦</div>
 <div class="decor two">♡</div>
-<div class="decor three">✧</div>
 
 <header>
-    <h1>🧁 Sweet Bakery</h1>
-    <p>Welcome to our little bakery world ♡</p>
+    <h1>Sweet <span>Bakery</span> 🧁</h1>
+    <p>
+        โลกแห่งเบเกอรี่แสนหวาน รวมขนมสุดน่ารักและแสนอร่อย<br>
+        เลือกชมขนมที่ชื่นชอบได้ตามใจคุณ ♡
+    </p>
 </header>
 
 <nav>
-    <button class="active" onclick="showPage('home',this)">หน้าหลัก</button>
-    <button onclick="showPage('galleryPage',this)">แกลเลอรีขนม</button>
+    <button class="active" onclick="showPage('home',this)">🏠 หน้าหลัก</button>
+    <button onclick="showPage('gallery',this)">🍰 แกลเลอรีขนม</button>
 </nav>
 
 <!-- HOME PAGE -->
@@ -415,160 +596,216 @@ footer {
 
     <div class="hero">
         <div class="hero-text">
-            <h2>Welcome to Sweet Bakery 💗</h2>
+            <div class="tag">♡ WELCOME TO SWEET BAKERY ♡</div>
+
+            <h2>Sweet Moments<br><span>Bakery World</span></h2>
+
             <p>
-                ยินดีต้อนรับสู่โลกของขนมหวาน
-                พบกับเค้ก ขนมปัง และคุกกี้แสนอร่อย
-                ที่เต็มไปด้วยความน่ารักและความสดใส
-                เลือกชมขนมที่คุณชื่นชอบได้เลย!
+                ยินดีต้อนรับสู่โลกของเบเกอรี่
+                พบกับเค้ก ขนมปัง คุกกี้ และโดนัท
+                ที่เต็มไปด้วยสีสันและความอร่อย
             </p>
-            <button class="main-btn" onclick="showPage('galleryPage',document.querySelectorAll('nav button')[1])">
-                ชมแกลเลอรีขนม ♡
+
+            <button class="main-btn" onclick="showPage('gallery')">
+                ✨ เข้าชมแกลเลอรี
             </button>
         </div>
 
         <div class="hero-gallery">
-            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600" alt="เค้กช็อกโกแลต">
-            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600" alt="ขนมอบ">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600" alt="เค้ก">
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600" alt="ครัวซองต์">
             <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600" alt="คุกกี้">
             <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600" alt="โดนัท">
         </div>
     </div>
 
-    <h2 class="title">Why Choose Us? ✨</h2>
-
     <div class="features">
-        <div class="feature-card">
-            <div class="emoji">🎂</div>
-            <h3>Fresh Bakery</h3>
-            <p>ขนมอบใหม่ สด สะอาด และน่ารับประทาน</p>
-        </div>
+        <h2 class="title">Our Bakery ♡</h2>
+        <p class="description">ความอร่อยที่มาพร้อมความสุข</p>
 
-        <div class="feature-card">
-            <div class="emoji">🍓</div>
-            <h3>Sweet & Delicious</h3>
-            <p>รสชาติหวานละมุน พร้อมความอร่อยในทุกคำ</p>
-        </div>
+        <div class="feature-grid">
+            <div class="feature">
+                <span>🎂</span>
+                <h3>เค้กแสนอร่อย</h3>
+                <p>นุ่ม หอม หวานละมุน</p>
+            </div>
 
-        <div class="feature-card">
-            <div class="emoji">💗</div>
-            <h3>Made With Love</h3>
-            <p>เติมเต็มความสุขด้วยขนมที่ทำด้วยความตั้งใจ</p>
+            <div class="feature">
+                <span>🥐</span>
+                <h3>ขนมปังสดใหม่</h3>
+                <p>อบใหม่ หอมกรุ่นทุกวัน</p>
+            </div>
+
+            <div class="feature">
+                <span>🍪</span>
+                <h3>ขนมสุดน่ารัก</h3>
+                <p>มีหลากหลายรสชาติให้เลือกชม</p>
+            </div>
         </div>
     </div>
+
 </section>
 
 <!-- GALLERY PAGE -->
-<section id="galleryPage" class="page">
+<section id="gallery" class="page">
+    <div class="gallery-section">
 
-    <h2 class="title">Sweet Bakery Gallery ❤️</h2>
+        <h2 class="title">Sweet Bakery Gallery 🩵</h2>
 
-    <div class="filter-buttons">
-        <button class="active" onclick="filterItems('all',this)">ทั้งหมด</button>
-        <button onclick="filterItems('cake',this)">เค้ก</button>
-        <button onclick="filterItems('bread',this)">ขนมปัง</button>
-        <button onclick="filterItems('cookie',this)">คุกกี้และโดนัท</button>
-    </div>
+        <p class="description">
+            เลือกหมวดหมู่ขนมที่ชื่นชอบ และกดไลค์ให้ขนมที่ถูกใจได้เลย!
+        </p>
 
-    <div class="gallery">
-
-        <div class="food-card" data-category="cake">
-            <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=700" alt="เค้กสตรอว์เบอร์รี">
-            <div class="food-info">
-                <h3>Strawberry Cake 🍓</h3>
-                <p>เค้กสตรอว์เบอร์รีสีสวย หวานละมุน</p>
-                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
-            </div>
+        <div class="filters">
+            <button class="active" onclick="filterItems('all',this)">ทั้งหมด</button>
+            <button onclick="filterItems('cake',this)">🎂 เค้ก</button>
+            <button onclick="filterItems('bread',this)">🥐 ขนมปัง</button>
+            <button onclick="filterItems('cookie',this)">🍪 คุกกี้และโดนัท</button>
         </div>
 
-        <div class="food-card" data-category="cake">
-            <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=700" alt="เค้กช็อกโกแลต">
-            <div class="food-info">
-                <h3>Chocolate Cake 🍫</h3>
-                <p>เค้กช็อกโกแลตเข้มข้น นุ่มละมุน</p>
-                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
-            </div>
-        </div>
+        <div class="gallery">
 
-        <div class="food-card" data-category="cake">
-            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=700" alt="เค้กครีม">
-            <div class="food-info">
-                <h3>Cream Cake 🍰</h3>
-                <p>เค้กครีมเนื้อนุ่ม ตกแต่งอย่างสวยงาม</p>
-                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            <div class="card" data-category="cake">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=700" alt="Strawberry Cake">
+                </div>
+                <div class="card-content">
+                    <h3>Strawberry Cake 🍓</h3>
+                    <p>เค้กสตรอว์เบอร์รีแสนหวาน</p>
+                    <div class="like-area">
+                        <button class="like-btn" onclick="addLike(this)">♡ กดไลค์</button>
+                        <span class="like-count">❤️ <b>0</b> Likes</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="food-card" data-category="bread">
-            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=700" alt="ขนมปัง">
-            <div class="food-info">
-                <h3>Fresh Bread 🍞</h3>
-                <p>ขนมปังอบใหม่ หอมกรุ่นจากเตา</p>
-                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            <div class="card" data-category="cake">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=700" alt="Chocolate Cake">
+                </div>
+                <div class="card-content">
+                    <h3>Chocolate Cake 🍫</h3>
+                    <p>เค้กช็อกโกแลตเข้มข้น</p>
+                    <div class="like-area">
+                        <button class="like-btn" onclick="addLike(this)">♡ กดไลค์</button>
+                        <span class="like-count">❤️ <b>0</b> Likes</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="food-card" data-category="bread">
-            <img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=700" alt="ครัวซองต์">
-            <div class="food-info">
-                <h3>Croissant 🥐</h3>
-                <p>ครัวซองต์กรอบนอกนุ่มใน</p>
-                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            <div class="card" data-category="cake">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=700" alt="Birthday Cake">
+                </div>
+                <div class="card-content">
+                    <h3>Birthday Cake 🎂</h3>
+                    <p>เค้กวันเกิดสุดพิเศษ</p>
+                    <div class="like-area">
+                        <button class="like-btn" onclick="addLike(this)">♡ กดไลค์</button>
+                        <span class="like-count">❤️ <b>0</b> Likes</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="food-card" data-category="bread">
-            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=700" alt="ขนมอบ">
-            <div class="food-info">
-                <h3>Bakery Roll 🥯</h3>
-                <p>ขนมอบเนื้อนุ่ม หอมอร่อย</p>
-                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            <div class="card" data-category="bread">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=700" alt="Croissant">
+                </div>
+                <div class="card-content">
+                    <h3>Croissant 🥐</h3>
+                    <p>ครัวซองต์กรอบนอกนุ่มใน</p>
+                    <div class="like-area">
+                        <button class="like-btn" onclick="addLike(this)">♡ กดไลค์</button>
+                        <span class="like-count">❤️ <b>0</b> Likes</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="food-card" data-category="cookie">
-            <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=700" alt="คุกกี้">
-            <div class="food-info">
-                <h3>Chocolate Cookies 🍪</h3>
-                <p>คุกกี้ช็อกโกแลตกรอบ หอมหวาน</p>
-                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            <div class="card" data-category="bread">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=700" alt="Fresh Bread">
+                </div>
+                <div class="card-content">
+                    <h3>Fresh Bread 🍞</h3>
+                    <p>ขนมปังอบใหม่หอมกรุ่น</p>
+                    <div class="like-area">
+                        <button class="like-btn" onclick="addLike(this)">♡ กดไลค์</button>
+                        <span class="like-count">❤️ <b>0</b> Likes</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- เปลี่ยนรูป Sweet Donut เป็นรูปโดนัท -->
-        <div class="food-card" data-category="cookie">
-            <img
-                src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=700"
-                alt="โดนัทเคลือบสีชมพู"
-            >
-            <div class="food-info">
-                <h3>Sweet Donut 🍩</h3>
-                <p>โดนัทเคลือบสีสันสดใส หวานละมุน น่ารับประทาน</p>
-                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            <div class="card" data-category="bread">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=700" alt="Sweet Bread">
+                </div>
+                <div class="card-content">
+                    <h3>Sweet Bread 🥖</h3>
+                    <p>ขนมปังนุ่มแสนอร่อย</p>
+                    <div class="like-area">
+                        <button class="like-btn" onclick="addLike(this)">♡ กดไลค์</button>
+                        <span class="like-count">❤️ <b>0</b> Likes</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="food-card" data-category="cookie">
-            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=700" alt="คุกกี้เนย">
-            <div class="food-info">
-                <h3>Butter Cookies 🧈</h3>
-                <p>คุกกี้เนยหอมกรุ่น กรอบอร่อย</p>
-                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            <div class="card" data-category="cookie">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=700" alt="Cookies">
+                </div>
+                <div class="card-content">
+                    <h3>Chocolate Cookies 🍪</h3>
+                    <p>คุกกี้ช็อกโกแลตชิปกรุบกรอบ</p>
+                    <div class="like-area">
+                        <button class="like-btn" onclick="addLike(this)">♡ กดไลค์</button>
+                        <span class="like-count">❤️ <b>0</b> Likes</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
+            <div class="card" data-category="cookie">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=700" alt="Donut">
+                </div>
+                <div class="card-content">
+                    <h3>Sweet Donut 🍩</h3>
+                    <p>โดนัทสีสันสดใสแสนอร่อย</p>
+                    <div class="like-area">
+                        <button class="like-btn" onclick="addLike(this)">♡ กดไลค์</button>
+                        <span class="like-count">❤️ <b>0</b> Likes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="cookie">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=700" alt="Mini Cookies">
+                </div>
+                <div class="card-content">
+                    <h3>Mini Cookies 🍪</h3>
+                    <p>คุกกี้ชิ้นเล็กน่ารัก</p>
+                    <div class="like-area">
+                        <button class="like-btn" onclick="addLike(this)">♡ กดไลค์</button>
+                        <span class="like-count">❤️ <b>0</b> Likes</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </section>
 
 <footer>
-    <h3>🧁 Sweet Bakery</h3>
-    <p>Thank you for visiting our bakery gallery ♡</p>
-    <p>© 2026 Sweet Bakery Gallery</p>
+    <h3>🧁 Sweet Bakery ♡</h3>
+    <p>Made with love and sweetness ✨</p>
+    <p>© 2026 Sweet Bakery | All Rights Reserved</p>
 </footer>
 
 <script>
-// เปลี่ยนหน้าเว็บไซต์
-function showPage(pageId,button) {
+
+/* เปลี่ยนหน้า */
+function showPage(pageId, button) {
+
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
@@ -579,7 +816,11 @@ function showPage(pageId,button) {
         btn.classList.remove('active');
     });
 
-    button.classList.add('active');
+    if (button) {
+        button.classList.add('active');
+    } else {
+        document.querySelectorAll('nav button')[1].classList.add('active');
+    }
 
     window.scrollTo({
         top: 0,
@@ -587,34 +828,46 @@ function showPage(pageId,button) {
     });
 }
 
-// กรองประเภทขนม
-function filterItems(category,button) {
-    document.querySelectorAll('.food-card').forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-            card.classList.remove('hide');
-        } else {
-            card.classList.add('hide');
-        }
+/* FILTER CATEGORY */
+function filterItems(category, button) {
+
+    document.querySelectorAll('.card').forEach(card => {
+
+        const match = category === 'all' ||
+                      card.dataset.category === category;
+
+        card.classList.toggle('hide', !match);
     });
 
-    document.querySelectorAll('.filter-buttons button').forEach(btn => {
+    document.querySelectorAll('.filters button').forEach(btn => {
         btn.classList.remove('active');
     });
 
     button.classList.add('active');
 }
 
-// ปุ่มถูกใจ
+/* LIKE BUTTON */
 function addLike(button) {
-    const count = button.querySelector('b');
-    count.textContent = Number(count.textContent) + 1;
+
+    const count = button.parentElement.querySelector('.like-count b');
+
+    let likes = Number(count.textContent);
+    likes++;
+
+    count.textContent = likes;
+
+    button.innerHTML = '♥ ถูกใจแล้ว';
 
     button.classList.remove('pop');
     void button.offsetWidth;
     button.classList.add('pop');
 
-    button.innerHTML = '♥ ถูกใจแล้ว <b>' + count.textContent + '</b>';
+    setTimeout(() => {
+        button.classList.remove('pop');
+        button.innerHTML = '♡ กดไลค์';
+    }, 400);
 }
+
 </script>
 
 </body>
