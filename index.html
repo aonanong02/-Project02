@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sweet Bakery ♡</title>
+<title>Sweet Bakery | Gallery</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -17,157 +18,189 @@
 }
 
 :root {
-    --blue: #65bce9;
-    --light-blue: #dff5ff;
+    --blue: #58b9e9;
+    --lightblue: #e1f5ff;
     --pink: #ff91bd;
-    --dark-pink: #dc639f;
-    --text: #536b80;
-    --white: #ffffff;
+    --darkpink: #df639f;
+    --text: #5c7183;
 }
 
 body {
-    background: linear-gradient(135deg,#e5f7ff,#fff0f7,#dff5ff);
+    background: linear-gradient(135deg,#e4f7ff,#fff0f7,#e5f6ff);
     color: var(--text);
     overflow-x: hidden;
 }
 
-/* ตกแต่งพื้นหลัง */
-body::before {
-    content: "✦";
+/* BACKGROUND DECORATION */
+.decor {
     position: fixed;
-    top: 20%;
-    left: 3%;
-    color: #8bd6fa66;
-    font-size: 80px;
-    animation: spin 12s linear infinite;
     z-index: -1;
+    font-size: 65px;
+    opacity: .15;
+    animation: float 5s ease-in-out infinite;
+    pointer-events: none;
 }
 
-body::after {
-    content: "♡";
-    position: fixed;
-    bottom: 10%;
+.decor.one {
+    top: 20%;
+    left: 3%;
+}
+
+.decor.two {
+    bottom: 12%;
     right: 4%;
-    color: #ff9bc466;
-    font-size: 100px;
-    animation: float 5s ease-in-out infinite;
-    z-index: -1;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0) rotate(-10deg); }
+    50% { transform: translateY(-25px) rotate(10deg); }
+}
+
+/* HEADER */
+header {
+    text-align: center;
+    padding: 75px 20px 60px;
+    background:
+        radial-gradient(circle at 15% 20%,#ffffff 0,transparent 25%),
+        linear-gradient(120deg,#bceaff,#ffd9e9);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "✦";
+    position: absolute;
+    top: 15px;
+    left: 12%;
+    font-size: 65px;
+    color: white;
+    animation: spin 10s linear infinite;
+}
+
+header::after {
+    content: "♡";
+    position: absolute;
+    right: 12%;
+    bottom: 10px;
+    font-size: 80px;
+    color: white;
+    animation: float 4s infinite;
 }
 
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
 
-@keyframes float {
-    50% { transform: translateY(-25px); }
+header h1 {
+    font-size: clamp(35px,6vw,60px);
+    color: #399ccc;
+    text-shadow: 3px 5px 15px #ffffff;
+    animation: slideDown .8s ease;
 }
 
-/* NAVBAR */
+header h1 span {
+    color: #e979aa;
+}
+
+header p {
+    margin-top: 12px;
+    color: #66869b;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* NAVIGATION */
 nav {
-    width: 100%;
-    padding: 17px 7%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px;
     background: #ffffffd9;
-    backdrop-filter: blur(15px);
-    box-shadow: 0 5px 25px #80c9ec30;
+    backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: 0 5px 20px #77c4e533;
 }
 
-.logo {
-    color: #48a9db;
-    font-size: 25px;
-    font-weight: 700;
-    text-shadow: 2px 3px 10px #9bdcf966;
-}
-
-.nav-links {
-    display: flex;
-    gap: 12px;
-}
-
-.nav-links button {
+nav button {
     border: none;
+    background: transparent;
+    color: #63849a;
     padding: 10px 22px;
     border-radius: 30px;
-    background: transparent;
-    color: #64849b;
-    font-size: 15px;
     cursor: pointer;
-    transition: .35s;
+    transition: .3s;
+    font-size: 14px;
 }
 
-.nav-links button:hover,
-.nav-links button.active {
-    background: linear-gradient(100deg,#68c5ed,#ff9ec9);
+nav button:hover,
+nav button.active {
+    background: linear-gradient(100deg,#58b9e9,#ff91bd);
     color: white;
-    box-shadow: 0 5px 15px #8bcbed77;
+    box-shadow: 0 6px 15px #81c9ed77;
     transform: translateY(-3px);
 }
 
-/* เปลี่ยนหน้า */
+/* PAGE */
 .page {
     display: none;
-    animation: appear .6s ease;
+    animation: fade .5s ease;
 }
 
 .page.active {
     display: block;
 }
 
-@keyframes appear {
-    from { opacity: 0; transform: translateY(20px); }
+@keyframes fade {
+    from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* HOME HERO */
+/* HOME */
 .hero {
-    min-height: 560px;
-    padding: 70px 8%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 35px;
+    padding: 65px 9%;
     flex-wrap: wrap;
-    background:
-    radial-gradient(circle at 80% 20%,#c7efff 0,transparent 30%),
-    radial-gradient(circle at 20% 90%,#ffd7e9 0,transparent 30%);
 }
 
 .hero-text {
     flex: 1;
-    min-width: 280px;
-    max-width: 570px;
+    min-width: 270px;
 }
 
 .tag {
     display: inline-block;
-    padding: 8px 18px;
     background: white;
-    color: #50a9d9;
+    color: #4da8d7;
+    padding: 9px 18px;
     border-radius: 30px;
-    box-shadow: 0 5px 15px #79c9ed44;
+    box-shadow: 0 5px 15px #83c9ed44;
 }
 
-.hero h1 {
-    font-size: clamp(38px,6vw,65px);
-    line-height: 1.3;
-    margin: 20px 0;
-    color: #429ed1;
-    text-shadow: 3px 4px 15px #8bcbed55;
+.hero h2 {
+    color: #399ccc;
+    font-size: clamp(35px,5vw,55px);
+    line-height: 1.4;
+    margin: 18px 0;
 }
 
-.hero h1 span {
-    color: #f17eaf;
+.hero h2 span {
+    color: #eb7eae;
 }
 
 .hero p {
     line-height: 2;
-    color: #71899a;
-    font-size: 16px;
+    color: #73899a;
 }
 
 .main-btn {
@@ -175,102 +208,93 @@ nav {
     padding: 14px 30px;
     border: none;
     border-radius: 35px;
+    background: linear-gradient(100deg,#58b9e9,#ff91bd);
     color: white;
-    background: linear-gradient(100deg,#56b9e8,#ff91bd);
-    box-shadow: 0 8px 20px #75c5e977;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
+    box-shadow: 0 8px 20px #81c9ed77;
     transition: .3s;
 }
 
 .main-btn:hover {
-    transform: translateY(-7px) scale(1.06);
-    box-shadow: 0 13px 25px #75c5e999;
+    transform: translateY(-6px) scale(1.06);
+    box-shadow: 0 13px 25px #81c9ed99;
 }
 
-.hero-images {
+.hero-gallery {
     flex: 1;
-    min-width: 280px;
+    min-width: 270px;
+    max-width: 460px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
-    max-width: 470px;
 }
 
-.hero-images img {
+.hero-gallery img {
     width: 100%;
-    height: 190px;
+    height: 175px;
     object-fit: cover;
     border-radius: 25px;
     border: 5px solid white;
-    box-shadow: 0 10px 25px #68bce955;
+    box-shadow: 0 8px 20px #79c5e655;
     transition: .4s;
 }
 
-.hero-images img:first-child {
-    transform: translateY(25px);
+.hero-gallery img:hover {
+    transform: scale(1.08) rotate(2deg);
 }
 
-.hero-images img:hover {
-    transform: scale(1.07) rotate(2deg);
-}
-
-/* HOME FEATURE */
+/* FEATURE */
 .features {
-    padding: 60px 8%;
+    padding: 45px 8% 65px;
     text-align: center;
 }
 
-.section-title {
-    font-size: 34px;
-    color: #49a8dc;
+.title {
+    font-size: 32px;
+    color: #399ccc;
     margin-bottom: 10px;
 }
 
-.subtitle {
-    color: #879eae;
+.description {
+    color: #879baa;
     margin-bottom: 30px;
 }
 
 .feature-grid {
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    gap: 25px;
+    gap: 22px;
 }
 
 .feature {
-    padding: 30px 20px;
-    background: #ffffffdc;
+    background: white;
     border: 2px solid #d9f1ff;
     border-radius: 25px;
-    box-shadow: 0 8px 25px #83c8e633;
+    padding: 30px 15px;
+    box-shadow: 0 8px 22px #8ac9e633;
     transition: .35s;
 }
 
 .feature:hover {
     transform: translateY(-10px);
-    border-color: #ffb9d6;
-    box-shadow: 0 15px 30px #83c8e666;
+    border-color: #ffaed0;
+    box-shadow: 0 15px 30px #8ac9e677;
 }
 
 .feature span {
-    font-size: 48px;
+    font-size: 45px;
 }
 
 .feature h3 {
-    color: #e77cac;
-    margin: 12px 0 5px;
+    color: #df78a8;
+    margin: 10px 0;
 }
 
 /* GALLERY */
 .gallery-section {
     padding: 55px 7%;
     text-align: center;
-    min-height: 600px;
-}
-
-.gallery-section .section-title {
-    text-shadow: 2px 3px 12px #8bcbed55;
 }
 
 .filters {
@@ -285,7 +309,7 @@ nav {
     padding: 11px 23px;
     border: 2px solid #a9ddf5;
     background: white;
-    color: #579dc4;
+    color: #529fc9;
     border-radius: 30px;
     cursor: pointer;
     transition: .3s;
@@ -293,37 +317,42 @@ nav {
 
 .filters button:hover,
 .filters button.active {
+    background: linear-gradient(100deg,#58b9e9,#ff91bd);
     color: white;
     border-color: transparent;
-    background: linear-gradient(100deg,#55b9e8,#ff9bc5);
-    box-shadow: 0 6px 15px #83c8e677;
-    transform: scale(1.07);
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px #83c9ed77;
 }
 
-/* จัดภาพให้สมดุล */
+/* GALLERY GRID */
 .gallery {
     display: grid;
     grid-template-columns: repeat(3,minmax(0,1fr));
     gap: 28px;
     max-width: 1200px;
     margin: auto;
-    align-items: stretch;
 }
 
 .card {
     background: white;
+    border: 2px solid #e0f4ff;
     border-radius: 25px;
     overflow: hidden;
-    border: 2px solid #e1f4ff;
-    box-shadow: 0 8px 25px #75bfe633;
-    transition: .4s;
     text-align: left;
+    box-shadow: 0 8px 25px #7fc6e633;
+    transition: .4s;
+    animation: cardIn .5s ease;
+}
+
+@keyframes cardIn {
+    from { opacity: 0; transform: scale(.95); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 .card:hover {
     transform: translateY(-10px);
-    border-color: #ffafd0;
-    box-shadow: 0 18px 35px #76c5ed66;
+    border-color: #ffacd0;
+    box-shadow: 0 18px 35px #78c3e866;
 }
 
 .card.hide {
@@ -331,10 +360,9 @@ nav {
 }
 
 .card-image {
-    width: 100%;
-    height: 230px;
+    height: 225px;
     overflow: hidden;
-    background: #eaf8ff;
+    background: #e5f6ff;
 }
 
 .card-image img {
@@ -344,8 +372,8 @@ nav {
     transition: .6s;
 }
 
-.card:hover .card-image img {
-    transform: scale(1.12) rotate(1deg);
+.card:hover img {
+    transform: scale(1.12);
 }
 
 .card-content {
@@ -353,40 +381,40 @@ nav {
 }
 
 .card h3 {
-    color: #479fce;
-    font-size: 19px;
+    color: #429fcf;
+    font-size: 18px;
 }
 
 .card p {
     color: #8a9eac;
     font-size: 14px;
-    margin-top: 5px;
+    margin-top: 6px;
 }
 
-/* LIKE */
+/* LIKE BUTTON */
 .like-area {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    border-top: 1px solid #e6f5fc;
-    margin-top: 18px;
+    border-top: 1px solid #e3f3fc;
     padding-top: 15px;
+    margin-top: 17px;
 }
 
 .like-btn {
     border: none;
-    background: #e8f7ff;
-    color: #4ba6d7;
-    padding: 10px 18px;
+    background: #e7f6ff;
+    color: #439fce;
     border-radius: 30px;
-    font-size: 14px;
+    padding: 10px 17px;
     cursor: pointer;
     transition: .25s;
 }
 
 .like-btn:hover {
-    background: #d0efff;
+    background: #ffddeb;
+    color: #dc639f;
     transform: scale(1.08);
 }
 
@@ -400,11 +428,11 @@ nav {
     font-weight: 600;
 }
 
-.heart-pop {
-    animation: pop .35s ease;
+.pop {
+    animation: heartPop .35s ease;
 }
 
-@keyframes pop {
+@keyframes heartPop {
     0% { transform: scale(1); }
     50% { transform: scale(1.35); }
     100% { transform: scale(1); }
@@ -412,59 +440,48 @@ nav {
 
 /* FOOTER */
 footer {
+    margin-top: 50px;
     padding: 35px 15px;
     text-align: center;
+    background: linear-gradient(110deg,#c7edff,#ffd9e9);
     color: #66869b;
-    background: linear-gradient(100deg,#c7edff,#ffd9e9);
-    margin-top: 50px;
 }
 
 footer h3 {
-    color: #429ed1;
-    font-size: 23px;
+    color: #399ccc;
+    font-size: 24px;
     margin-bottom: 8px;
 }
 
-/* TABLET */
+/* RESPONSIVE */
 @media(max-width:900px) {
     .gallery {
         grid-template-columns: repeat(2,minmax(0,1fr));
     }
-
-    .hero {
-        justify-content: center;
-    }
 }
 
-/* MOBILE */
 @media(max-width:600px) {
+    header {
+        padding: 55px 15px;
+    }
+
     nav {
-        flex-direction: column;
-        gap: 12px;
-        padding: 15px 5%;
+        padding: 12px 5px;
+        gap: 5px;
     }
 
-    .nav-links {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .nav-links button {
-        padding: 9px 17px;
-        font-size: 13px;
+    nav button {
+        padding: 9px 13px;
+        font-size: 12px;
     }
 
     .hero {
-        padding: 50px 6%;
         text-align: center;
+        padding: 45px 6%;
     }
 
-    .hero-images {
-        max-width: 380px;
-    }
-
-    .hero-images img {
-        height: 145px;
+    .hero-gallery img {
+        height: 140px;
     }
 
     .feature-grid {
@@ -480,8 +497,8 @@ footer h3 {
         height: 230px;
     }
 
-    .section-title {
-        font-size: 28px;
+    .title {
+        font-size: 27px;
     }
 }
 </style>
@@ -489,32 +506,40 @@ footer h3 {
 
 <body>
 
+<div class="decor one">✦</div>
+<div class="decor two">♡</div>
+
+<!-- HEADER -->
+<header>
+    <h1>Sweet <span>Bakery</span> 🧁</h1>
+    <p>โลกแห่งเบเกอรี่แสนหวาน รวมขนมสุดน่ารักและแสนอร่อย<br>
+    เลือกชมขนมที่ชื่นชอบได้ตามใจคุณ ♡</p>
+</header>
+
+<!-- MENU -->
 <nav>
-    <div class="logo">🧁 Sweet Bakery</div>
-    <div class="nav-links">
-        <button class="active" onclick="showPage('home',this)">🏠 หน้าหลัก</button>
-        <button onclick="showPage('gallery',this)">🍰 แกลเลอรี</button>
-    </div>
+    <button class="active" onclick="showPage('home',this)">🏠 หน้าหลัก</button>
+    <button onclick="showPage('gallery',this)">🍰 แกลเลอรีขนม</button>
 </nav>
 
-<!-- หน้าหลัก -->
+<!-- HOME PAGE -->
 <section id="home" class="page active">
 
     <div class="hero">
         <div class="hero-text">
             <div class="tag">♡ WELCOME TO SWEET BAKERY ♡</div>
-            <h1>Sweet Moments<br><span>Bakery World</span> 🧁</h1>
+            <h2>Sweet Moments<br><span>Bakery World</span></h2>
             <p>
-                ยินดีต้อนรับสู่โลกแห่งความหวาน
-                พบกับเบเกอรี่แสนอร่อยและน่ารัก
-                ที่คัดสรรมาเพื่อเติมเต็มความสุขให้ทุกวันของคุณ
+                ยินดีต้อนรับสู่โลกของเบเกอรี่
+                พบกับเค้ก ขนมปัง คุกกี้ และโดนัท
+                ที่เต็มไปด้วยสีสันและความอร่อย
             </p>
             <button class="main-btn" onclick="showPage('gallery')">
-                ✨ ชมแกลเลอรีขนม
+                ✨ เข้าชมแกลเลอรี
             </button>
         </div>
 
-        <div class="hero-images">
+        <div class="hero-gallery">
             <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600" alt="เค้ก">
             <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600" alt="ครัวซองต์">
             <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600" alt="คุกกี้">
@@ -523,8 +548,8 @@ footer h3 {
     </div>
 
     <div class="features">
-        <h2 class="section-title">Our Bakery ♡</h2>
-        <p class="subtitle">ความอร่อยที่มาพร้อมความสุข</p>
+        <h2 class="title">Our Bakery ♡</h2>
+        <p class="description">ความอร่อยที่มาพร้อมความสุข</p>
 
         <div class="feature-grid">
             <div class="feature">
@@ -532,27 +557,32 @@ footer h3 {
                 <h3>เค้กแสนอร่อย</h3>
                 <p>นุ่ม หอม หวานละมุน</p>
             </div>
+
             <div class="feature">
                 <span>🥐</span>
                 <h3>ขนมปังสดใหม่</h3>
                 <p>อบใหม่ หอมกรุ่นทุกวัน</p>
             </div>
+
             <div class="feature">
                 <span>🍪</span>
                 <h3>ขนมสุดน่ารัก</h3>
-                <p>หลากหลายรสชาติให้เลือกชม</p>
+                <p>มีหลากหลายรสชาติให้เลือกชม</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- หน้าแกลเลอรี -->
+<!-- GALLERY PAGE -->
 <section id="gallery" class="page">
     <div class="gallery-section">
 
-        <h2 class="section-title">Sweet Bakery Gallery 🩵</h2>
-        <p class="subtitle">เลือกรับชมขนมที่ชื่นชอบ แล้วกดไลค์ให้ขนมกันได้เลย!</p>
+        <h2 class="title">Sweet Bakery Gallery 🩵</h2>
+        <p class="description">
+            เลือกหมวดหมู่ขนมที่ชื่นชอบ และกดไลค์ให้ขนมที่ถูกใจได้เลย!
+        </p>
 
+        <!-- FILTER BUTTONS -->
         <div class="filters">
             <button class="active" onclick="filterItems('all',this)">ทั้งหมด</button>
             <button onclick="filterItems('cake',this)">🎂 เค้ก</button>
@@ -560,6 +590,7 @@ footer h3 {
             <button onclick="filterItems('cookie',this)">🍪 คุกกี้และโดนัท</button>
         </div>
 
+        <!-- GALLERY CARDS -->
         <div class="gallery">
 
             <div class="card" data-category="cake">
@@ -634,7 +665,7 @@ footer h3 {
 
             <div class="card" data-category="bread">
                 <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=700" alt="Bread Roll">
+                    <img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=700" alt="Sweet Bread">
                 </div>
                 <div class="card-content">
                     <h3>Sweet Bread 🥖</h3>
@@ -661,3 +692,105 @@ footer h3 {
             </div>
 
             <div class="card" data-category="cookie">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=700" alt="Donut">
+                </div>
+                <div class="card-content">
+                    <h3>Sweet Donut 🍩</h3>
+                    <p>โดนัทสีสันสดใสแสนอร่อย</p>
+                    <div class="like-area">
+                        <button class="like-btn" onclick="addLike(this)">♡ กดไลค์</button>
+                        <span class="like-count">❤️ <b>0</b> Likes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="cookie">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=700" alt="Mini Cookies">
+                </div>
+                <div class="card-content">
+                    <h3>Mini Cookies 🍪</h3>
+                    <p>คุกกี้ชิ้นเล็กน่ารัก</p>
+                    <div class="like-area">
+                        <button class="like-btn" onclick="addLike(this)">♡ กดไลค์</button>
+                        <span class="like-count">❤️ <b>0</b> Likes</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <h3>🧁 Sweet Bakery ♡</h3>
+    <p>Made with love and sweetness ✨</p>
+    <p>© 2026 Sweet Bakery | All Rights Reserved</p>
+</footer>
+
+<script>
+
+/* เปลี่ยนหน้า */
+function showPage(pageId, button) {
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId).classList.add('active');
+
+    document.querySelectorAll('nav button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    if (button) {
+        button.classList.add('active');
+    } else {
+        document.querySelectorAll('nav button')[1].classList.add('active');
+    }
+
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* FILTER CATEGORY */
+function filterItems(category, button) {
+    document.querySelectorAll('.card').forEach(card => {
+        const match = category === 'all' ||
+                      card.dataset.category === category;
+
+        card.classList.toggle('hide', !match);
+    });
+
+    document.querySelectorAll('.filters button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    button.classList.add('active');
+}
+
+/* LIKE BUTTON: กดเพิ่มได้ไม่จำกัด */
+function addLike(button) {
+    const count = button.parentElement.querySelector('.like-count b');
+
+    let likes = Number(count.textContent);
+    likes++;
+
+    count.textContent = likes;
+
+    button.innerHTML = '♥ ถูกใจแล้ว';
+    button.classList.remove('pop');
+    void button.offsetWidth;
+    button.classList.add('pop');
+
+    setTimeout(() => {
+        button.classList.remove('pop');
+        button.innerHTML = '♡ กดไลค์';
+    }, 400);
+}
+
+</script>
+
+</body>
+</html>
+```
