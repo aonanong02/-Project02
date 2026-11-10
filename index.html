@@ -359,4 +359,248 @@ footer {
 
 @media (max-width: 900px) {
     .gallery { grid-template-columns: repeat(2,1fr); }
-    .hero
+    .hero { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+    header { padding: 45px 15px; }
+    nav { gap: 3px; }
+    nav button { padding: 9px 13px; font-size: 13px; }
+    .page { padding: 25px 5%; }
+    .gallery,.features { grid-template-columns: 1fr; }
+    .hero-gallery img { height: 145px; }
+    .food-card img { height: 220px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,*::before,*::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="decor one">✦</div>
+<div class="decor two">♡</div>
+<div class="decor three">✧</div>
+
+<header>
+    <h1>🧁 Sweet Bakery</h1>
+    <p>Welcome to our little bakery world ♡</p>
+</header>
+
+<nav>
+    <button class="active" onclick="showPage('home',this)">หน้าหลัก</button>
+    <button onclick="showPage('galleryPage',this)">แกลเลอรีขนม</button>
+</nav>
+
+<section id="home" class="page active">
+
+    <div class="hero">
+        <div class="hero-text">
+            <h2>Welcome to Sweet Bakery 💗</h2>
+            <p>
+                ยินดีต้อนรับสู่โลกของขนมหวาน
+                พบกับเค้ก ขนมปัง และคุกกี้แสนอร่อย
+                ที่เต็มไปด้วยความน่ารักและความสดใส
+                เลือกชมขนมที่คุณชื่นชอบได้เลย!
+            </p>
+            <button class="main-btn" onclick="showPage('galleryPage',document.querySelectorAll('nav button')[1])">
+                ชมแกลเลอรีขนม ♡
+            </button>
+        </div>
+
+        <div class="hero-gallery">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600" alt="เค้กช็อกโกแลต">
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600" alt="ขนมอบ">
+            <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600" alt="คุกกี้">
+            <img src="https://images.unsplash.com/photo-1644845796549-49d0e1e5de57?auto=format&fit=crop&w=700&q=80" alt="โดนัทเคลือบสีขาวโรยเกล็ดสีชมพู">
+        </div>
+    </div>
+
+    <h2 class="title">Why Choose Us? ✨</h2>
+
+    <div class="features">
+        <div class="feature-card">
+            <div class="emoji">🎂</div>
+            <h3>Fresh Bakery</h3>
+            <p>ขนมอบใหม่ สด สะอาด และน่ารับประทาน</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="emoji">🍓</div>
+            <h3>Sweet & Delicious</h3>
+            <p>รสชาติหวานละมุน พร้อมความอร่อยในทุกคำ</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="emoji">💗</div>
+            <h3>Made With Love</h3>
+            <p>เติมเต็มความสุขด้วยขนมที่ทำด้วยความตั้งใจ</p>
+        </div>
+    </div>
+</section>
+
+<section id="galleryPage" class="page">
+
+    <h2 class="title">Sweet Bakery Gallery 🥨</h2>
+
+    <div class="filter-buttons">
+        <button class="active" onclick="filterItems('all',this)">ทั้งหมด</button>
+        <button onclick="filterItems('cake',this)">เค้ก</button>
+        <button onclick="filterItems('bread',this)">ขนมปัง</button>
+        <button onclick="filterItems('cookie',this)">คุกกี้และโดนัท</button>
+    </div>
+
+    <div class="gallery">
+
+        <div class="food-card" data-category="cake">
+            <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=700" alt="เค้กสตรอว์เบอร์รี">
+            <div class="food-info">
+                <h3>Strawberry Cake 🍓</h3>
+                <p>เค้กสตรอว์เบอร์รีสีสวย หวานละมุน</p>
+                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="cake">
+            <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=700" alt="เค้กช็อกโกแลต">
+            <div class="food-info">
+                <h3>Chocolate Cake 🍫</h3>
+                <p>เค้กช็อกโกแลตเข้มข้น นุ่มละมุน</p>
+                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="cake">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=700" alt="เค้กครีม">
+            <div class="food-info">
+                <h3>Cream Cake 🍰</h3>
+                <p>เค้กครีมเนื้อนุ่ม ตกแต่งอย่างสวยงาม</p>
+                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="bread">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=700" alt="ขนมปัง">
+            <div class="food-info">
+                <h3>Fresh Bread 🍞</h3>
+                <p>ขนมปังอบใหม่ หอมกรุ่นจากเตา</p>
+                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="bread">
+            <img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=700" alt="ครัวซองต์">
+            <div class="food-info">
+                <h3>Croissant 🥐</h3>
+                <p>ครัวซองต์กรอบนอกนุ่มใน</p>
+                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="bread">
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=700" alt="ขนมอบ">
+            <div class="food-info">
+                <h3>Bakery Roll 🥯</h3>
+                <p>ขนมอบเนื้อนุ่ม หอมอร่อย</p>
+                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="cookie">
+            <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=700" alt="คุกกี้">
+            <div class="food-info">
+                <h3>Chocolate Cookies 🍪</h3>
+                <p>คุกกี้ช็อกโกแลตกรอบ หอมหวาน</p>
+                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="cookie">
+            <img
+                src="https://images.unsplash.com/photo-1644845796549-49d0e1e5de57?auto=format&fit=crop&w=700&q=80"
+                alt="โดนัทเคลือบสีขาวโรยเกล็ดสีชมพู"
+            >
+            <div class="food-info">
+                <h3>Sweet Donut 🍩</h3>
+                <p>โดนัทเคลือบสีขาวโรยเกล็ดสีชมพู หวานอร่อย</p>
+                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="cookie">
+            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=700" alt="คุกกี้เนย">
+            <div class="food-info">
+                <h3>Butter Cookies 🧈</h3>
+                <p>คุกกี้เนยหอมกรุ่น กรอบอร่อย</p>
+                <button class="like-btn" onclick="addLike(this)">♡ ถูกใจ <b>0</b></button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <h3>🧁 Sweet Bakery</h3>
+    <p>Thank you for visiting our bakery gallery ♡</p>
+    <p>© 2026 Sweet Bakery Gallery</p>
+</footer>
+
+<script>
+function showPage(pageId,button) {
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId).classList.add('active');
+
+    document.querySelectorAll('nav button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    button.classList.add('active');
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+function filterItems(category,button) {
+    document.querySelectorAll('.food-card').forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+            card.classList.remove('hide');
+        } else {
+            card.classList.add('hide');
+        }
+    });
+
+    document.querySelectorAll('.filter-buttons button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    button.classList.add('active');
+}
+
+function addLike(button) {
+    const count = button.querySelector('b');
+    count.textContent = Number(count.textContent) + 1;
+
+    button.classList.remove('pop');
+    void button.offsetWidth;
+    button.classList.add('pop');
+
+    button.innerHTML = '♥ ถูกใจแล้ว <b>' + count.textContent + '</b>';
+}
+</script>
+
+</body>
+</html>
+```
